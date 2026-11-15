@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agency-OS — The Open-Source Operating System for Agencies, Dev Shops & Freelancers</title>
+  <meta name="description" content="Agency-OS: Client onboarding, interactive proposals, milestone Kanban, 18% GST invoicing, and direct UPI settlement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06090f;
+      --card: #0d131f;
+      --subtle: #141d2f;
+      --border: #1f2b42;
+      --text: #f0f4fc;
+      --muted: #8b9cb5;
+      --cyan: #00f0ff;
+      --purple: #a855f7;
+      --green: #10b981;
+      --saffron: #ff8b3d;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.5; padding: 0 16px; }
+    .container { max-width: 1240px; margin: 0 auto; }
+
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; }
+    .brand-logo { width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, var(--cyan), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #000; }
+    
+    .sponsor-bar {
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: linear-gradient(90deg, rgba(0,240,255,0.1), rgba(168,85,247,0.08));
+      border: 1px solid rgba(0,240,255,0.3);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .sponsor-bar a { color: var(--cyan); text-decoration: none; font-weight: 600; }
+
+    .hero { padding: 40px 0 24px; text-align: center; }
+    .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .gradient-text { background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 80%, var(--purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--muted); font-size: 16px; max-width: 640px; margin: 0 auto 24px; }
+
+    .tab-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; }
+    .tab-btn { padding: 10px 20px; background: var(--card); border: 1px solid var(--border); color: var(--text); font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .tab-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); }
+
+    .view-panel { display: none; }
+    .view-panel.active { display: block; }
+    .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+    .input-grp { margin-bottom: 14px; }
+    .input-grp label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .input-ctrl { width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: var(--font); font-size: 13px; outline: none; }
+    .input-ctrl:focus { border-color: var(--cyan); }
+
+    /* Deliverable list */
+    .deliv-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--subtle); border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
+    
+    /* Kanban */
+    .kanban-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .kanban-col { background: var(--subtle); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+    .kanban-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 13px; }
+
+    .btn-act { padding: 12px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; }
+    .btn-primary { background: var(--cyan); color: #000; }
+    .btn-success { background: var(--green); color: #000; }
+
+    footer { border-top: 1px solid var(--border); margin-top: 60px; padding: 30px 0 50px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
+
+    @media (max-width: 860px) {
+      .grid-2, .kanban-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-logo">💼</div>
+          <div>Agency-OS <span style="font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; background:rgba(0,240,255,0.15); color:var(--cyan);">Open-Source</span></div>
+        </div>
+        <a href="https://github.com/1nsharma-labs/agency-os" target="_blank" style="color:var(--text); text-decoration:none; font-size:14px; font-weight:600;">GitHub Repository &rarr;</a>
+      </div>
+
+      <div class="sponsor-bar">
+        <div>
+          📢 <strong>Sponsorship Slot Open:</strong> Reach 30,000+ Digital Agencies, Dev Shops & Freelancers globally.
+        </div>
+        <a href="mailto:amitsharma9976@gmail.com?subject=Sponsor%20Agency-OS">Book Slot &rarr;</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>
+        The Complete Open-Source <br>
+        <span class="gradient-text">Agency & Freelance Operating System</span>
+      </h1>
+      <p>
+        Client Onboarding, Scope Proposals, Milestone Kanban & 18% GST Invoicing with Direct UPI Settlement.
+      </p>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchView('propView')">📄 Interactive Proposal Builder</button>
+        <button class="tab-btn" onclick="switchView('kanbanView')">📊 Live Client Kanban Portal</button>
+        <button class="tab-btn" onclick="switchView('invoiceView')">🧾 GST & UPI Settlement</button>
+      </div>
+    </section>
+
+    <!-- TAB 1: Proposal Builder -->
+    <div id="propView" class="view-panel active">
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size:18px; margin-bottom:14px;">Create Client Proposal</h3>
+          <div class="input-grp">
+            <label>Client Name / Organization</label>
+            <input type="text" id="propClient" class="input-ctrl" value="Nexus Tech Corp">
+          </div>
+          <div class="input-grp">
+            <label>Project Scope Title</label>
+            <input type="text" id="propTitle" class="input-ctrl" value="Enterprise AI Workflow & Autonomous Agents">
+          </div>
+          <div class="input-grp">
+            <label>Total Budget (INR)</label>
+            <input type="number" id="propBudget" class="input-ctrl" value="200000">
+          </div>
+          <button class="btn-act btn-primary" style="width:100%;" onclick="generateProposalUI()">Generate Live Proposal</button>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:16px; margin-bottom:12px;">Active Deliverables</h3>
+          <div class="deliv-item">
+            <span>&bull; Architecture Blueprint & Discovery</span>
+            <strong style="color:var(--cyan); font-family:var(--mono);">₹50,000</strong>
+          </div>
+          <div class="deliv-item">
+            <span>&bull; Autonomous Agent Mesh & Core APIs</span>
+            <strong style="color:var(--cyan); font-family:var(--mono);">₹1,00,000</strong>
+          </div>
+          <div class="deliv-item">
+            <span>&bull; Security Hardening & Production Deploy</span>
+            <strong style="color:var(--cyan); font-family:var(--mono);">₹50,000</strong>
+          </div>
+          <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-weight:700;">
+            <span>Project Total:</span>
+            <span style="color:var(--green); font-family:var(--mono);">₹2,00,000 INR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Kanban Portal -->
+    <div id="kanbanView" class="view-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <div>
+          <h3 style="font-size:18px;">Project: Nexus Tech Corp &bull; Milestone Kanban</h3>
+          <p style="font-size:13px; color:var(--muted);">Zero-login client transparency link</p>
+        </div>
+        <div style="font-family:var(--mono); font-size:13px; color:var(--green);">Progress: 66% Complete</div>
+      </div>
+
+      <div class="kanban-grid">
+        <div class="kanban-col">
+          <div style="font-weight:700; font-size:13px; color:var(--muted);">TO DO (0)</div>
+        </div>
+
+        <div class="kanban-col">
+          <div style="font-weight:700; font-size:13px; color:var(--cyan);">IN PROGRESS (1)</div>
+          <div class="kanban-card">
+            <strong>Security Hardening & CI/CD</strong>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">Milestone 3 &bull; Due in 5 days</div>
+            <div style="font-family:var(--mono); font-size:12px; color:var(--cyan); margin-top:6px;">₹50,000</div>
+          </div>
+        </div>
+
+        <div class="kanban-col">
+          <div style="font-weight:700; font-size:13px; color:var(--green);">DELIVERED & PAID (2)</div>
+          <div class="kanban-card">
+            <strong>Architecture Discovery</strong>
+            <div style="font-size:11px; color:var(--green); margin-top:4px;">✅ Paid via UPI</div>
+          </div>
+          <div class="kanban-card">
+            <strong>Autonomous Agent Mesh</strong>
+            <div style="font-size:11px; color:var(--green); margin-top:4px;">✅ Paid via UPI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: GST & Invoicing -->
+    <div id="invoiceView" class="view-panel">
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size:18px; margin-bottom:14px;">🧾 Milestone Tax Invoice</h3>
+          <div style="font-family:var(--mono); font-size:13px; background:var(--bg); border:1px solid var(--border); padding:16px; border-radius:8px;">
+            <div>Invoice ID : <strong>AGY-INV-849201</strong></div>
+            <div>Client     : <strong>Nexus Tech Corp</strong></div>
+            <div>Milestone  : <strong>Autonomous Agent Mesh & Core APIs</strong></div>
+            <div style="margin:12px 0; border-top:1px dashed var(--border); padding-top:8px;">
+              <div>Professional Consulting Fee : ₹1,00,000.00</div>
+              <div>IGST / GST (18%)            : ₹18,000.00</div>
+            </div>
+            <div style="font-weight:700; font-size:16px; color:var(--green);">Grand Total : ₹1,18,000.00 INR</div>
+          </div>
+        </div>
+
+        <div class="card" style="text-align:center;">
+          <h3 style="font-size:18px; margin-bottom:14px;">📱 Direct UPI Settlement (0% SaaS Fee)</h3>
+          <div style="background:#fff; padding:16px; border-radius:8px; display:inline-block; margin-bottom:12px;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=6393741171@upi%26pn=Amit%20Sharma%26am=118000%26cu=INR" alt="UPI QR" width="160" height="160">
+          </div>
+          <div style="font-family:var(--mono); font-size:13px; color:var(--cyan);">
+            Payee UPI: <strong>6393741171@upi</strong>
+          </div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">Direct Bank Settlement &bull; Zero Stripe/Razorpay deductions</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        ⚡ <strong>Agency-OS</strong> &bull; Conceived & built by <strong>Amit Sharma (@1nsharma)</strong> in Kanpur, India
+      </div>
+      <div>
+        Direct UPI: <strong style="color:var(--cyan); font-family:var(--mono);">6393741171@upi</strong> | Email: <a href="mailto:amitsharma9976@gmail.com" style="color:var(--cyan); text-decoration:none;">amitsharma9976@gmail.com</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function generateProposalUI() {
+      const client = document.getElementById('propClient').value;
+      const budget = document.getElementById('propBudget').value;
+      alert(`Proposal generated for ${client} (Total: ₹${Number(budget).toLocaleString()} INR)!\nLive Client Link generated.`);
+    }
+  </script>
+</body>
+</html>

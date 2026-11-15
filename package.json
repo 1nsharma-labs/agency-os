@@ -1,0 +1,41 @@
+{
+  "name": "agency-os",
+  "version": "1.0.0",
+  "description": "The Open-Source Agency, Dev Shop & Freelancer Operating System — Client Onboarding, Scope Proposals, Milestone Kanban & 18% GST Invoicing with Direct UPI Settlement",
+  "type": "module",
+  "main": "core/src/proposals.js",
+  "bin": {
+    "agency-os": "./cli/bin/agency.js"
+  },
+  "scripts": {
+    "start": "node cli/bin/agency.js status",
+    "test": "node --test test/test_agency.js",
+    "mcp": "node core/src/mcp/server.js"
+  },
+  "keywords": [
+    "agency-management",
+    "freelance-tools",
+    "proposal-builder",
+    "milestone-kanban",
+    "gst-invoicing",
+    "upi-settlement",
+    "mcp-server"
+  ],
+  "author": "Amit Sharma <amitsharma9976@gmail.com> (https://github.com/1nsharma)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1nsharma-labs/agency-os.git"
+  },
+  "homepage": "https://1nsharma-labs.github.io/agency-os/",
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://polar.sh/1nsharma-labs"
+    },
+    {
+      "type": "upi",
+      "url": "upi://pay?pa=6393741171@upi&pn=Amit%20Sharma"
+    }
+  ]
+}
